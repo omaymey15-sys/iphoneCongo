@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhoneCongo - Store Officiel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-mobile-alt"></i>
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="store.html" class="nav-link">stores</a>
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero mini -->
+        <div class="hero-mini">
+            <h2>iPhoneCongo</h2>
+            <p>Lubumbashi • Kolwezi</p>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchAccueil" placeholder="Rechercher un produit..." oninput="filterProducts()">
+        </div>
+
+        <!-- Nouveautés horizontales -->
+        <section class="horiz-section">
+            <h3 class="section-title"><i class="fas fa-star"></i> Nouveautés</h3>
+            <div class="horiz-scroll" id="newProducts"></div>
+        </section>
+
+        <!-- Catégorie iPhone -->
+        <section class="category-section">
+            <h3 class="section-title"><i class="fab fa-apple"></i> iPhone</h3>
+            <div class="products-grid" id="iphoneProducts"></div>
+        </section>
+
+        <!-- Catégorie Samsung -->
+        <section class="category-section">
+            <h3 class="section-title"><i class="fab fa-android"></i> Samsung</h3>
+            <div class="products-grid" id="samsungProducts"></div>
+        </section>
+
+        <!-- Catégorie Accessoires -->
+        <section class="category-section">
+            <h3 class="section-title"><i class="fas fa-headphones"></i> Accessoires</h3>
+            <div class="products-grid" id="accessoryProducts"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 iPhoneCongo • Lubumbashi & Kolwezi</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
