@@ -1,399 +1,224 @@
-// Constantes
-const STORAGE_KEY = 'iphonecongo_products';
+const COMMUNITY_KEY = 'iphonecongo_community';
 
-// Données initiales avec des iPhones populaires au Congo
+// Données initiales (iPhone, Samsung, Accessoires)
 const initialProducts = [
+    // iPhone Kinshasa
     {
         id: Date.now() - 86400000,
-        title: 'iPhone 15 Pro Max 256GB - Noir',
-        model: 'iPhone 15 Pro Max',
+        category: 'telephone',
+        brand: 'iPhone',
+        title: 'iPhone 15 Pro Max 256GB',
         price: 1450,
         image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-max-black-titanium-select?wid=470&hei=556&fmt=png-alpha&.v=1692885771534',
-        description: '📱 iPhone 15 Pro Max 256GB, état neuf sous blister. Puce A17 Pro, appareil photo pro, titane. Garantie Apple 1 an. Accessoires inclus.',
+        description: 'Neuf sous blister, garantie 1 an',
         condition: 'Neuf',
         city: 'Kinshasa',
-        storage: '256GB',
-        battery: '100%',
-        contact: '+243 812 345 678',
-        date: new Date(Date.now() - 86400000).toISOString()
+        contact: '243812345678',
+        seller: 'KingPhone',
+        date: new Date().toISOString()
     },
+    {
+        id: Date.now() - 86000000,
+        category: 'telephone',
+        brand: 'iPhone',
+        title: 'iPhone 14 Pro 128GB',
+        price: 950,
+        image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-deep-purple-select?wid=470&hei=556&fmt=png-alpha&.v=1661448071151',
+        description: 'Comme neuf, batterie 98%',
+        condition: 'Comme neuf',
+        city: 'Kinshasa',
+        contact: '243812345678',
+        seller: 'KinStore',
+        date: new Date().toISOString()
+    },
+    // iPhone Lubumbashi
     {
         id: Date.now() - 172800000,
-        title: 'iPhone 14 128GB - Violet',
-        model: 'iPhone 14',
+        category: 'telephone',
+        brand: 'iPhone',
+        title: 'iPhone 14 128GB',
         price: 850,
         image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-purple-select-202209?wid=470&hei=556&fmt=png-alpha&.v=1661448071151',
-        description: 'iPhone 14 128GB, utilisé 3 mois, état comme neuf. Batterie 98%. Chargeur original inclus. Vendu avec facture.',
-        condition: 'Comme neuf',
+        description: 'Bon état, chargeur inclus',
+        condition: 'Bon état',
         city: 'Lubumbashi',
-        storage: '128GB',
-        battery: '98%',
-        contact: '+243 997 654 321',
-        date: new Date(Date.now() - 172800000).toISOString()
+        contact: '243997654321',
+        seller: 'LubumPhone',
+        date: new Date().toISOString()
     },
+    // Samsung Kinshasa
     {
         id: Date.now() - 259200000,
-        title: 'iPhone 13 128GB - Minuit',
-        model: 'iPhone 13',
-        price: 650,
-        image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-midnight-select-2021?wid=470&hei=556&fmt=png-alpha&.v=1630793892000',
-        description: 'iPhone 13 128GB, bon état, fonctionne parfaitement. Batterie 85%. Livré avec chargeur et coque de protection.',
-        condition: 'Bon état',
-        city: 'Goma',
-        storage: '128GB',
-        battery: '85%',
-        contact: '+243 993 123 456',
-        date: new Date(Date.now() - 259200000).toISOString()
+        category: 'telephone',
+        brand: 'Samsung',
+        title: 'Samsung Galaxy S23 Ultra',
+        price: 1200,
+        image: 'https://images.samsung.com/is/image/samsung/p6pim/africa_en/sm-s918bzkdafd/gallery/africa-en-galaxy-s23-ultra-s918-sm-s918bzkdafd-thumb-535755250',
+        description: 'Neuf, 512GB',
+        condition: 'Neuf',
+        city: 'Kinshasa',
+        contact: '243812345678',
+        seller: 'SamsungPro',
+        date: new Date().toISOString()
+    },
+    // Accessoires
+    {
+        id: Date.now() - 345600000,
+        category: 'accessoire',
+        accessoryType: 'Chargeur',
+        title: 'Chargeur original iPhone 20W',
+        price: 25,
+        image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MU8X2?wid=400&hei=400&fmt=jpeg&qlt=95&.v=1590627935000',
+        description: 'Chargeur original Apple, neuf',
+        condition: 'Neuf',
+        city: 'Kinshasa',
+        contact: '243812345678',
+        seller: 'Access Congo',
+        date: new Date().toISOString()
+    },
+    {
+        id: Date.now() - 400000000,
+        category: 'accessoire',
+        accessoryType: 'Coque',
+        title: 'Coque iPhone 13/14/15 Pro',
+        price: 15,
+        image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MX2Y2?wid=400&hei=400&fmt=jpeg&qlt=95&.v=1590627935000',
+        description: 'Coque silicone originale',
+        condition: 'Neuf',
+        city: 'Lubumbashi',
+        contact: '243997654321',
+        seller: 'Access Plus',
+        date: new Date().toISOString()
     }
 ];
 
 // Initialisation
-function initializeStore() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(initialProducts));
-        return initialProducts;
+function initializeData() {
+    if (!localStorage.getItem(COMMUNITY_KEY)) {
+        localStorage.setItem(COMMUNITY_KEY, JSON.stringify(initialProducts));
     }
-    return JSON.parse(stored);
 }
 
-// Gestionnaire de produits
-const ProductManager = {
-    getAll: () => {
-        const products = localStorage.getItem(STORAGE_KEY);
-        return products ? JSON.parse(products) : [];
-    },
-    
-    save: (products) => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-        return products;
-    },
-    
-    add: (productData) => {
-        const products = ProductManager.getAll();
-        const newProduct = {
-            ...productData,
-            id: Date.now(),
-            date: new Date().toISOString()
-        };
-        products.unshift(newProduct);
-        ProductManager.save(products);
-        return newProduct;
-    },
-    
-    delete: (id) => {
-        const products = ProductManager.getAll();
-        const filtered = products.filter(p => p.id !== id);
-        ProductManager.save(filtered);
-        return filtered;
-    },
-    
-    search: (term) => {
-        const products = ProductManager.getAll();
-        if (!term) return products;
-        
-        term = term.toLowerCase();
-        return products.filter(p => 
-            p.title.toLowerCase().includes(term) ||
-            p.model.toLowerCase().includes(term) ||
-            p.description.toLowerCase().includes(term) ||
-            p.city.toLowerCase().includes(term)
-        );
-    },
-    
-    sort: (products, criteria) => {
-        const sorted = [...products];
-        switch(criteria) {
-            case 'priceAsc':
-                return sorted.sort((a, b) => a.price - b.price);
-            case 'priceDesc':
-                return sorted.sort((a, b) => b.price - a.price);
-            case 'date':
-            default:
-                return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
-        }
-    }
-};
-
-// Gestionnaire d'interface
-const UIManager = {
-    formatPrice: (price) => {
-        return price.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-    },
-    
-    formatDate: (dateString) => {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffTime = Math.abs(now - date);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        
-        if (diffDays === 1) return 'Hier';
-        if (diffDays < 7) return `Il y a ${diffDays} jours`;
-        if (diffDays < 30) return `Il y a ${Math.floor(diffDays / 7)} semaines`;
-        return date.toLocaleDateString('fr-FR');
-    },
-    
-    createProductCard: (product) => {
-        const badgeColor = product.condition === 'Neuf' ? '#009639' : '#0078d4';
-        
-        return `
-            <div class="product-card" data-id="${product.id}">
-                <div class="product-badge" style="background: ${badgeColor}">
-                    ${product.city}
-                </div>
-                <img src="${product.image}" 
-                     alt="${product.title}"
-                     onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=iPhone+Congo'">
-                <div class="product-info">
-                    <h3 class="product-title">${product.title}</h3>
-                    <p class="product-model">${product.model}</p>
-                    <div class="product-price">${UIManager.formatPrice(product.price)}</div>
-                    
-                    <div class="product-details">
-                        <span class="product-detail-item">
-                            <i class="fas fa-sim-card"></i> ${product.storage}
-                        </span>
-                        <span class="product-detail-item">
-                            <i class="fas fa-battery-full"></i> ${product.battery}
-                        </span>
-                    </div>
-                    
-                    <span class="product-condition">${product.condition}</span>
-                    <p class="product-description">${product.description}</p>
-                    
-                    <a href="https://wa.me/${product.contact.replace(/[^0-9]/g, '')}" 
-                       class="product-contact" 
-                       target="_blank">
-                        <i class="fab fa-whatsapp"></i> Contacter le vendeur
-                    </a>
-                    
-                    <div class="product-footer">
-                        <span>
-                            <i class="fas fa-map-marker-alt"></i> ${product.city}
-                        </span>
-                        <span>
-                            <i class="fas fa-clock"></i> ${UIManager.formatDate(product.date)}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    },
-    
-    createAdminItem: (product) => {
-        return `
-            <div class="admin-product-item" data-id="${product.id}">
-                <div class="admin-product-info">
-                    <h3>${product.title}</h3>
-                    <p>💰 $${UIManager.formatPrice(product.price)} • ${product.city}</p>
-                    <p>📱 ${product.storage} • ${product.condition}</p>
-                    <div class="admin-product-meta">
-                        <span>${product.contact}</span>
-                        <span>${UIManager.formatDate(product.date)}</span>
-                    </div>
-                </div>
-                <button class="delete-btn" onclick="deleteProduct(${product.id})">
-                    <i class="fas fa-trash-alt"></i> Supprimer
-                </button>
-            </div>
-        `;
-    }
-};
-
-// Affichage des produits
-function displayProducts() {
-    const container = document.getElementById('products-container');
-    if (!container) return;
-
-    // Afficher un loader
-    container.innerHTML = '<div class="loading"><i class="fas fa-circle-notch fa-spin"></i> Chargement...</div>';
-
-    setTimeout(() => {
-        const searchTerm = document.getElementById('search')?.value || '';
-        const sortBy = document.getElementById('sort')?.value || 'date';
-
-        let products = ProductManager.search(searchTerm);
-        products = ProductManager.sort(products, sortBy);
-
-        if (products.length === 0) {
-            container.innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Aucun iPhone trouvé</h3>
-                    <p>Essayez avec d'autres termes de recherche</p>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = products.map(UIManager.createProductCard).join('');
-    }, 300); // Petit délai pour montrer l'animation
+// Récupérer les produits
+function getProducts() {
+    return JSON.parse(localStorage.getItem(COMMUNITY_KEY)) || [];
 }
 
-// Affichage admin
-function displayAdminProducts() {
-    const container = document.getElementById('admin-products-list');
-    if (!container) return;
-
-    const products = ProductManager.getAll();
-
-    if (products.length === 0) {
-        container.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-box-open"></i>
-                <p>Aucune annonce pour le moment</p>
-                <p style="font-size: 0.9rem;">Publiez votre premier iPhone !</p>
-            </div>
-        `;
-        return;
+// Fonction pour générer le lien WhatsApp
+function getWhatsAppLink(contact, product, sellerName) {
+    const cleanContact = contact.replace(/[^0-9]/g, '');
+    
+    let typeInfo = '';
+    if (product.category === 'accessoire') {
+        typeInfo = `\n🎧 Type: ${product.accessoryType || 'Accessoire'}`;
+    } else {
+        typeInfo = `\n📱 Marque: ${product.brand}`;
     }
+    
+    const message = `Bonjour ${sellerName},
 
-    container.innerHTML = products.map(UIManager.createAdminItem).join('');
+Je suis intéressé par votre *${product.title}*.
+
+💰 Prix: $${product.price}
+📍 Ville: ${product.city}${typeInfo}
+📸 Photo: ${product.image}
+📝 Description: ${product.description}
+
+Est-ce toujours disponible ?`;
+
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/${cleanContact}?text=${encodedMessage}`;
 }
 
-// Ajout d'un produit
-function handleAddProduct(event) {
-    event.preventDefault();
-
-    // Récupération des données
-    const formData = {
-        title: document.getElementById('title').value,
-        model: document.getElementById('model').value,
-        price: parseFloat(document.getElementById('price').value),
-        image: document.getElementById('image').value,
-        description: document.getElementById('description').value,
-        condition: document.getElementById('condition').value,
-        city: document.getElementById('city').value,
-        storage: document.getElementById('storage').value,
-        battery: document.getElementById('battery').value,
-        contact: document.getElementById('contact').value
-    };
-
-    // Validation
-    for (let [key, value] of Object.entries(formData)) {
-        if (!value && key !== 'id' && key !== 'date') {
-            showNotification(`Veuillez remplir le champ ${key}`, 'warning');
-            return;
-        }
-    }
-
-    if (isNaN(formData.price) || formData.price <= 0) {
-        showNotification('Veuillez entrer un prix valide', 'warning');
-        return;
-    }
-
-    // Validation du contact (format +243)
-    const contactRegex = /^\+243\d{9}$/;
-    if (!contactRegex.test(formData.contact.replace(/\s/g, ''))) {
-        showNotification('Format de contact invalide. Utilisez +243 XXX XXX XXX', 'warning');
-        return;
-    }
-
-    // Ajout du produit
-    ProductManager.add(formData);
-    
-    // Reset du formulaire
-    event.target.reset();
-    
-    // Mise à jour de l'affichage
-    displayAdminProducts();
-    
-    // Notification
-    showNotification('✅ iPhone publié avec succès !', 'success');
-}
-
-// Suppression d'un produit
-window.deleteProduct = function(id) {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')) {
-        ProductManager.delete(id);
-        displayAdminProducts();
-        showNotification('📱 Annonce supprimée', 'info');
-    }
-};
-
-// Système de notification
-function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    
-    let icon = 'check-circle';
-    if (type === 'info') icon = 'info-circle';
-    if (type === 'warning') icon = 'exclamation-triangle';
-    
-    notification.innerHTML = `
-        <i class="fas fa-${icon}"></i>
-        ${message}
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-out';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
-}
-
-// Animation keyframes
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Initialisation au chargement
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialiser les données
-    initializeStore();
-    
-    // Afficher les produits
-    displayProducts();
-    displayAdminProducts();
-    
-    // Recherche avec debounce
-    const searchInput = document.getElementById('search');
-    if (searchInput) {
-        let timeout;
-        searchInput.addEventListener('input', () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(displayProducts, 300);
+// Fonction de défilement horizontal
+window.scrollStore = function(elementId, amount) {
+    const container = document.getElementById(elementId);
+    if (container) {
+        container.scrollBy({
+            left: amount,
+            behavior: 'smooth'
         });
     }
-    
-    // Tri
-    const sortSelect = document.getElementById('sort');
-    if (sortSelect) {
-        sortSelect.addEventListener('change', displayProducts);
-    }
-    
-    // Formulaire d'ajout
-    const productForm = document.getElementById('product-form');
-    if (productForm) {
-        productForm.addEventListener('submit', handleAddProduct);
-    }
-});
+};
 
-// Sauvegarde automatique (optionnel)
-window.addEventListener('beforeunload', () => {
-    // Sauvegarde des brouillons si nécessaire
-    console.log('iPhoneCongo - Données sauvegardées');
+// Créer une carte pour store horizontal
+function createStoreCard(product) {
+    const whatsappLink = getWhatsAppLink(product.contact, product, product.seller);
+    
+    let badgeText = product.brand || 'Accessoire';
+    if (product.category === 'accessoire') {
+        badgeText = product.accessoryType || 'Accessoire';
+    }
+    
+    return `
+        <div class="store-card">
+            <span class="category-badge">${badgeText}</span>
+            <span class="city-badge">${product.city}</span>
+            <img src="${product.image}" alt="${product.title}"
+                 onerror="this.src='https://via.placeholder.com/300x200?text=Product'">
+            <div class="card-content">
+                <h4>${product.title}</h4>
+                <div class="price">${product.price}</div>
+                <div class="condition">${product.condition}</div>
+                <div class="seller">
+                    <i class="fas fa-user"></i> ${product.seller}
+                </div>
+                <a href="${whatsappLink}" class="whatsapp-btn-small" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contacter
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+// Charger les iPhone par ville
+function loadiPhoneByCity(city, elementId) {
+    const container = document.getElementById(elementId);
+    if (!container) return;
+    
+    const products = getProducts()
+        .filter(p => p.category === 'telephone' && p.brand === 'iPhone' && p.city === city)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 8);
+    
+    container.innerHTML = products.map(createStoreCard).join('');
+}
+
+// Charger les Samsung par ville
+function loadSamsungByCity(city, elementId) {
+    const container = document.getElementById(elementId);
+    if (!container) return;
+    
+    const products = getProducts()
+        .filter(p => p.category === 'telephone' && p.brand === 'Samsung' && p.city === city)
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 8);
+    
+    container.innerHTML = products.map(createStoreCard).join('');
+}
+
+// Charger les accessoires
+function loadAccessoires(elementId) {
+    const container = document.getElementById(elementId);
+    if (!container) return;
+    
+    const products = getProducts()
+        .filter(p => p.category === 'accessoire')
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 10);
+    
+    container.innerHTML = products.map(createStoreCard).join('');
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    initializeData();
+    
+    // Charger tous les stores horizontaux
+    loadiPhoneByCity('Kinshasa', 'iphone-kinshasa-scroll');
+    loadiPhoneByCity('Lubumbashi', 'iphone-lubumbashi-scroll');
+    loadiPhoneByCity('Goma', 'iphone-goma-scroll');
+    loadSamsungByCity('Kinshasa', 'samsung-kinshasa-scroll');
+    loadSamsungByCity('Lubumbashi', 'samsung-lubumbashi-scroll');
+    loadAccessoires('accessoires-scroll');
 });
