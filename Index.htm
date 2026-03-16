@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhoneCongo - Achetez & Vendez des iPhones en RDC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-mobile-alt"></i>
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <nav>
+            <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+            <a href="admin.html"><i class="fas fa-cog"></i> Administration</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>🇨🇩 iPhone Congo</h2>
+                <p>Le meilleur du smartphone Apple en République Démocratique du Congo</p>
+                <div class="hero-features">
+                    <span><i class="fas fa-check-circle"></i> Livraison Kinshasa, Lubumbashi, Goma</span>
+                    <span><i class="fas fa-check-circle"></i> Paiement Mobile Money</span>
+                    <span><i class="fas fa-check-circle"></i> Garantie 1 an</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="filters">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Rechercher un iPhone (ex: iPhone 13, 14, 15...)">
+            </div>
+            <select id="sort">
+                <option value="date">📅 Nouveautés</option>
+                <option value="priceAsc">💰 Prix: Bas en haut</option>
+                <option value="priceDesc">💰 Prix: Haut en bas</option>
+            </select>
+        </div>
+
+        <div id="products-container" class="products-grid"></div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>iPhoneCongo</h3>
+                <p>Votre destination #1 pour les iPhones en RDC</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +243 XXX XXX XXX</p>
+                <p><i class="fas fa-envelope"></i> contact@iphonecongo.cd</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kinshasa, RDC</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 iPhoneCongo - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
