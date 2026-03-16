@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhoneCongo - Créer mon store</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .register-card {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .register-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .register-header i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .register-header h2 {
+            font-size: 1.3rem;
+        }
+        
+        .register-form {
+            padding: 1.5rem;
+        }
+        
+        .form-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-section h3 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .form-group label i {
+            color: var(--primary);
+            margin-right: 0.3rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .logo-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .logo-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--primary);
+            overflow: hidden;
+        }
+        
+        .logo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-preview i {
+            font-size: 2rem;
+            color: var(--gray);
+        }
+        
+        .upload-btn {
+            background: var(--light);
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        
+        .upload-status {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .btn-register {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-register:hover {
+            background: #007a2f;
+        }
+        
+        .info-text {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-store-alt"></i>
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="../index.html" class="nav-link">accueil</a>
+            <a href="../store.html" class="nav-link">stores</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="register-card">
+            <div class="register-header">
+                <i class="fas fa-store"></i>
+                <h2>Créer mon store</h2>
+            </div>
+            
+            <form class="register-form" onsubmit="registerStore(event)">
+                <!-- Infos store -->
+                <div class="form-section">
+                    <h3><i class="fas fa-info-circle"></i> Informations</h3>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-store"></i> Nom du store *</label>
+                        <input type="text" id="storeName" placeholder="Ex: Phone Shop Lubumbashi" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Ville *</label>
+                        <input type="text" id="storeCity" placeholder="Ex: Lubumbashi, Kolwezi..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-map-pin"></i> Adresse</label>
+                        <input type="text" id="storeAddress" placeholder="Avenue, quartier...">
+                    </div>
+                </div>
+                
+                <!-- Identité -->
+                <div class="form-section">
+                    <h3><i class="fas fa-id-card"></i> Identité</h3>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-at"></i> Pseudo unique *</label>
+                        <input type="text" id="storePseudo" placeholder="Ex: phoneshoplubi" required>
+                        <div class="info-text">Sera utilisé dans l'URL de votre store</div>
+                    </div>
+                    
+                    <div class="logo-upload">
+                        <div class="logo-preview" id="logoPreview">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <input type="file" id="storeLogo" accept="image/*" style="display: none;" onchange="previewAndUploadLogo(event)">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('storeLogo').click()">
+                            <i class="fas fa-cloud-upload-alt"></i> Choisir un logo
+                        </button>
+                        <div id="logoUploadStatus" class="upload-status"></div>
+                        <input type="hidden" id="logoUrl">
+                    </div>
+                </div>
+                
+                <!-- Contact -->
+                <div class="form-section">
+                    <h3><i class="fas fa-phone"></i> Contact</h3>
+                    
+                    <div class="form-group">
+                        <label><i class="fab fa-whatsapp"></i> WhatsApp *</label>
+                        <input type="text" id="storeWhatsapp" placeholder="+243 XXX XXX XXX" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="storeEmail" placeholder="contact@store.com">
+                    </div>
+                </div>
+                
+                <!-- Sécurité -->
+                <div class="form-section">
+                    <h3><i class="fas fa-lock"></i> Sécurité</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Mot de passe *</label>
+                            <input type="password" id="storePassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmer *</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-register">
+                    <i class="fas fa-check-circle"></i> Créer mon store
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 iPhoneCongo - Stores partenaires</p>
+    </footer>
+
+    <script src="stores.js"></script>
+</body>
+</html>
