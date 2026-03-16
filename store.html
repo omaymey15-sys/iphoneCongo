@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhoneCongo - Store Communautaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-mobile-alt"></i>
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="store.html" class="active"><i class="fas fa-store"></i> Store</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Store -->
+        <section class="store-hero">
+            <h2><i class="fas fa-store"></i> Store Communautaire</h2>
+            <p>Publiez vos iPhone, Samsung et accessoires gratuitement !</p>
+        </section>
+
+        <!-- Formulaire de publication (seulement iPhone, Samsung, Accessoires) -->
+        <div class="publish-section">
+            <button class="toggle-form-btn" onclick="toggleForm()">
+                <i class="fas fa-plus-circle"></i> Publier une annonce
+            </button>
+            
+            <div id="publishForm" class="publish-form" style="display: none;">
+                <h3>Publier votre annonce</h3>
+                <form onsubmit="addCommunityProduct(event)">
+                    <div class="form-group">
+                        <label>Catégorie *</label>
+                        <select id="category" required onchange="toggleBrandField()">
+                            <option value="">Choisissez la catégorie</option>
+                            <option value="telephone">📱 Téléphone</option>
+                            <option value="accessoire">🎧 Accessoire</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="brandGroup">
+                        <label>Marque *</label>
+                        <select id="brand" required>
+                            <option value="">Choisissez la marque</option>
+                            <option value="iPhone">📱 iPhone</option>
+                            <option value="Samsung">📱 Samsung</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="accessoryGroup" style="display: none;">
+                        <label>Type d'accessoire *</label>
+                        <select id="accessoryType">
+                            <option value="">Choisissez le type</option>
+                            <option value="Chargeur">🔌 Chargeur</option>
+                            <option value="Coque">📱 Coque</option>
+                            <option value="Écouteurs">🎧 Écouteurs</option>
+                            <option value="Batterie">🔋 Batterie externe</option>
+                            <option value="Câble">📲 Câble</option>
+                            <option value="Protection écran">🛡️ Protection écran</option>
+                            <option value="Autre">❓ Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Modèle *</label>
+                            <input type="text" id="model" placeholder="Ex: iPhone 13, Galaxy S23, Chargeur original..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Prix (USD) *</label>
+                            <input type="number" id="price" placeholder="500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image *</label>
+                        <input type="url" id="image" placeholder="URL de l'image" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea id="description" placeholder="État, accessoires inclus, historique..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>État *</label>
+                            <select id="condition" required>
+                                <option value="Neuf">Neuf</option>
+                                <option value="Comme neuf">Comme neuf</option>
+                                <option value="Bon état">Bon état</option>
+                                <option value="État correct">État correct</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ville *</label>
+                            <select id="city" required>
+                                <option value="">Choisissez la ville</option>
+                                <option value="Kinshasa">Kinshasa</option>
+                                <option value="Lubumbashi">Lubumbashi</option>
+                                <option value="Goma">Goma</option>
+                                <option value="Bukavu">Bukavu</option>
+                                <option value="Kisangani">Kisangani</option>
+                                <option value="Matadi">Matadi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact WhatsApp *</label>
+                        <input type="text" id="contact" placeholder="+243 XXX XXX XXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Votre nom *</label>
+                        <input type="text" id="sellerName" placeholder="Votre nom ou pseudo" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-cloud-upload-alt"></i> Publier gratuitement
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="store-filters">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="storeSearch" placeholder="Rechercher...">
+            </div>
+            <select id="categoryFilter">
+                <option value="">Toutes les catégories</option>
+                <option value="iPhone">📱 iPhone</option>
+                <option value="Samsung">📱 Samsung</option>
+                <option value="accessoire">🎧 Accessoires</option>
+            </select>
+            <select id="cityFilter">
+                <option value="">Toutes les villes</option>
+                <option value="Kinshasa">Kinshasa</option>
+                <option value="Lubumbashi">Lubumbashi</option>
+                <option value="Goma">Goma</option>
+                <option value="Bukavu">Bukavu</option>
+                <option value="Kisangani">Kisangani</option>
+                <option value="Matadi">Matadi</option>
+            </select>
+            <select id="storeSort">
+                <option value="date">📅 Plus récents</option>
+                <option value="priceAsc">💰 Prix croissant</option>
+                <option value="priceDesc">💰 Prix décroissant</option>
+            </select>
+        </div>
+
+        <!-- Grille des produits -->
+        <div id="community-products" class="products-grid"></div>
+        <div id="noResults" class="no-results" style="display: none;">
+            <i class="fas fa-search"></i>
+            <h3>Aucune annonce trouvée</h3>
+            <p>Soyez le premier à publier !</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Store Communautaire</h3>
+                <p>iPhone • Samsung • Accessoires</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 iPhoneCongo - Store Communautaire</p>
+        </div>
+    </footer>
+
+    <script src="store.js"></script>
+</body>
+  </html>
