@@ -1,0 +1,467 @@
+/* ===== VARIABLES ===== */
+:root {
+    --primary: #0071e3;
+    --secondary: #34c759;
+    --dark: #1d1d1f;
+    --gray: #86868b;
+    --light-gray: #f0f0f0;
+    --white: #ffffff;
+    --whatsapp: #25d366;
+    --shadow: 0 1px 3px rgba(0,0,0,0.05);
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+/* ===== HEADER ÉPURÉ ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--light-gray);
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--white);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.header-search {
+    display: flex;
+    align-items: center;
+    background: #f8f8f8;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    width: 300px;
+}
+
+.header-search i {
+    color: var(--gray);
+    margin-right: 0.5rem;
+}
+
+.header-search input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.header-search input:focus {
+    outline: none;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--primary);
+}
+
+/* ===== MAIN ===== */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* ===== TITRE PAGE ===== */
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-title h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.page-title p {
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+/* ===== SECTIONS ===== */
+.products-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+/* ===== GRILLE PRODUITS ===== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ===== CARTE PRODUIT ===== */
+.product-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--light-gray);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    padding: 1rem;
+    background: #fafafa;
+}
+
+.product-info {
+    padding: 1rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.product-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+}
+
+.product-price::before {
+    content: '$';
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-right: 2px;
+}
+
+/* ===== BOUTONS ===== */
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-mini {
+    flex: 1;
+    padding: 0.4rem 0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.btn-mini.whatsapp {
+    background: var(--whatsapp);
+}
+
+.btn-mini.whatsapp:hover {
+    opacity: 0.9;
+}
+
+.btn-mini.call {
+    background: var(--primary);
+}
+
+.btn-mini.call:hover {
+    opacity: 0.9;
+}
+
+.btn-mini i {
+    font-size: 0.9rem;
+}
+
+/* ===== BADGES ===== */
+.new-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ffcc00;
+    color: var(--dark);
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.store-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--primary);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* ===== BOUTON AJOUTER STORE ===== */
+.btn-add-store {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.2s;
+}
+
+.btn-add-store:hover {
+    opacity: 0.9;
+}
+
+.btn-add-store i {
+    margin-right: 0.5rem;
+}
+
+/* ===== FILTRES ===== */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: var(--radius);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.filter-btn {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.filter-select {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* ===== STORE BLOCK ===== */
+.store-block {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.store-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.store-mini-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+
+.store-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.store-info p {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.view-store-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.page {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    cursor: pointer;
+}
+
+.page.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.next {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    cursor: pointer;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--light-gray);
+    margin-top: 2rem;
+}
+
+footer a {
+    color: var(--gray);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--whatsapp);
+}
+
+footer i {
+    color: var(--whatsapp);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .header-search {
+        width: 100%;
+    }
+    
+    nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
