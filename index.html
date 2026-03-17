@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>iPhoneCongo - Store Officiel</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,54 +15,95 @@
         </div>
         <div class="header-actions">
             <a href="store.html" class="nav-link">stores</a>
-            <div class="search-icon">
-                <i class="fas fa-search"></i>
-            </div>
+            <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
         </div>
     </header>
 
-    <main class="container">
+    <main>
         <!-- Hero mini -->
         <div class="hero-mini">
             <h2>iPhoneCongo</h2>
             <p>Lubumbashi • Kolwezi</p>
         </div>
 
-        <!-- Barre de recherche -->
-        <div class="search-bar">
+        <!-- Barre de recherche (cachée par défaut) -->
+        <div class="search-bar" id="searchBar" style="display: none;">
             <i class="fas fa-search"></i>
             <input type="text" id="searchAccueil" placeholder="Rechercher un produit..." oninput="filterProducts()">
+            <i class="fas fa-times" onclick="hideSearch()"></i>
         </div>
 
         <!-- Nouveautés horizontales -->
         <section class="horiz-section">
-            <h3 class="section-title"><i class="fas fa-star"></i> Nouveautés</h3>
-            <div class="horiz-scroll" id="newProducts"></div>
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-star"></i> Nouveautés</h3>
+                <span class="section-count" id="newCount">0</span>
+            </div>
+            <div class="horiz-scroll" id="newProducts">
+                <div class="loading-spinner">Chargement...</div>
+            </div>
         </section>
 
         <!-- Catégorie iPhone -->
         <section class="category-section">
-            <h3 class="section-title"><i class="fab fa-apple"></i> iPhone</h3>
-            <div class="products-grid" id="iphoneProducts"></div>
+            <div class="section-header">
+                <h3 class="section-title"><i class="fab fa-apple"></i> iPhone</h3>
+                <span class="section-count" id="iphoneCount">0</span>
+            </div>
+            <div class="horiz-scroll" id="iphoneProducts">
+                <div class="loading-spinner">Chargement...</div>
+            </div>
         </section>
 
         <!-- Catégorie Samsung -->
         <section class="category-section">
-            <h3 class="section-title"><i class="fab fa-android"></i> Samsung</h3>
-            <div class="products-grid" id="samsungProducts"></div>
+            <div class="section-header">
+                <h3 class="section-title"><i class="fab fa-android"></i> Samsung</h3>
+                <span class="section-count" id="samsungCount">0</span>
+            </div>
+            <div class="horiz-scroll" id="samsungProducts">
+                <div class="loading-spinner">Chargement...</div>
+            </div>
         </section>
 
         <!-- Catégorie Accessoires -->
         <section class="category-section">
-            <h3 class="section-title"><i class="fas fa-headphones"></i> Accessoires</h3>
-            <div class="products-grid" id="accessoryProducts"></div>
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-headphones"></i> Accessoires</h3>
+                <span class="section-count" id="accessoryCount">0</span>
+            </div>
+            <div class="horiz-scroll" id="accessoryProducts">
+                <div class="loading-spinner">Chargement...</div>
+            </div>
         </section>
+
+        <!-- Message si aucun résultat -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fas fa-search"></i>
+            <p>Aucun produit trouvé</p>
+        </div>
     </main>
 
-    <footer>
-        <p>© 2024 iPhoneCongo • Lubumbashi & Kolwezi</p>
-    </footer>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="store.html" class="nav-item">
+            <i class="fas fa-store"></i>
+            <span>Stores</span>
+        </a>
+        <a href="stores/register.html" class="nav-item">
+            <i class="fas fa-plus-circle"></i>
+            <span>Créer</span>
+        </a>
+        <a href="#" class="nav-item" onclick="openSearch()">
+            <i class="fas fa-search"></i>
+            <span>Recherche</span>
+        </a>
+    </nav>
 
     <script src="script.js"></script>
 </body>
-</html>
+            </html>
