@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Store</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .store-page {
+            max-width: 1200px;
+            margin: 1rem auto;
+        }
+        
+        /* Store Banner */
+        .store-banner {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .store-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .banner-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: var(--shadow-lg);
+            background: white;
+        }
+        
+        .banner-info {
+            flex: 1;
+        }
+        
+        .banner-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .banner-info .address {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+        
+        .banner-info .address i {
+            font-size: 1rem;
+        }
+        
+        .banner-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .banner-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+        }
+        
+        /* Store Actions */
+        .store-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            flex: 1;
+            min-width: 200px;
+            background: var(--white);
+            color: var(--dark);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            transition: all 0.2s;
+        }
+        
+        .action-btn.whatsapp {
+            background: var(--whatsapp);
+            color: white;
+            border: none;
+        }
+        
+        .action-btn.whatsapp:hover {
+            background: var(--whatsapp-dark);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+        
+        /* Store Description */
+        .store-description {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .store-description h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Products Grid */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .products-header h2 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .products-header h2 i {
+            color: var(--primary);
+        }
+        
+        .products-header .count {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            background: #fafafa;
+            padding: 1rem;
+        }
+        
+        .product-info {
+            padding: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .product-info h3 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .product-price::before {
+            content: '$';
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .product-condition {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: #e8f2ff;
+            color: var(--primary);
+            border-radius: var(--radius-xl);
+            font-size: 0.7rem;
+            margin: 0.3rem 0;
+        }
+        
+        .product-whatsapp {
+            display: block;
+            background: var(--whatsapp);
+            color: white;
+            text-decoration: none;
+            padding: 0.6rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .product-whatsapp i {
+            margin-right: 0.3rem;
+        }
+        
+        /* New Badge */
+        .new-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        /* No Products */
+        .no-products {
+            text-align: center;
+            padding: 3rem;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            color: var(--gray);
+        }
+        
+        .no-products i {
+            font-size: 3rem;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+        
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding: 0.3rem 1rem;
+            border-radius: var(--radius-xl);
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .back-button:hover {
+            background: var(--light);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .banner-stats {
+                justify-content: center;
+            }
+            
+            .store-actions {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-store-alt"></i>
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="../index.html" class="nav-link">accueil</a>
+            <a href="../store.html" class="nav-link">stores</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="../store.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Retour aux stores
+        </a>
+        
+        <div id="storeContent" class="store-page">
+            <div class="loading-spinner">Chargement du store...</div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 iPhoneCongo - Store partenaire</p>
+    </footer>
+
+    <script src="stores.js"></script>
+    <script>
+        // Charger la page publique du store
+        function loadPublicStore() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pseudo = urlParams.get('store');
+            
+            if (!pseudo) {
+                showNotification('Store non trouvé', 'error');
+                window.location.href = '../store.html';
+                return;
+            }
+            
+            const stores = getStores();
+            const store = stores.find(s => s.pseudo === pseudo);
+            
+            if (!store) {
+                document.getElementById('storeContent').innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-store"></i>
+                        <h3>Store non trouvé</h3>
+                        <p>Le store que vous recherchez n'existe pas</p>
+                        <a href="../store.html" class="btn-add-store" style="display:inline-block; margin-top:1rem; padding:0.8rem 2rem;">
+                            Voir tous les stores
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const products = getStoreProducts(store.id);
+            
+            // Incrémenter les vues (optionnel)
+            store.stats = store.stats || { views: 0 };
+            store.stats.views += 1;
+            
+            // Sauvegarder la mise à jour des vues
+            const allStores = getStores();
+            const storeIndex = allStores.findIndex(s => s.id === store.id);
+            if (storeIndex !== -1) {
+                allStores[storeIndex].stats = store.stats;
+                localStorage.setItem(STORES_KEY, JSON.stringify(allStores));
+            }
+            
+            displayStorePage(store, products);
+        }
+        
+        function displayStorePage(store, products) {
+            const container = document.getElementById('storeContent');
+            
+            const newProducts = products.filter(p => (new Date() - new Date(p.date)) < 86400000).length;
+            
+            let html = `
+                <div class="store-banner">
+                    <div class="banner-content">
+                        <img src="${store.logo || 'https://via.placeholder.com/120x120?text=Store'}" 
+                             alt="${store.name}" 
+                             class="banner-logo"
+                             onerror="this.src='https://via.placeholder.com/120x120?text=Store'">
+                        <div class="banner-info">
+                            <h1>${store.name}</h1>
+                            <div class="address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${store.city || 'Ville non spécifiée'} ${store.address ? '- ' + store.address : ''}
+                            </div>
+                            <div class="banner-stats">
+                                <span><i class="fas fa-box"></i> ${products.length} produits</span>
+                                <span><i class="fas fa-clock"></i> ${newProducts} nouveautés</span>
+                                <span><i class="fas fa-eye"></i> ${store.stats?.views || 0} vues</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="store-actions">
+                    <a href="https://wa.me/${store.whatsapp.replace(/[^0-9]/g, '')}" 
+                       class="action-btn whatsapp" 
+                       target="_blank">
+                        <i class="fab fa-whatsapp"></i> Contacter sur WhatsApp
+                    </a>
+                    ${store.email ? `
+                        <a href="mailto:${store.email}" class="action-btn">
+                            <i class="fas fa-envelope"></i> Envoyer un email
+                        </a>
+                    ` : ''}
+                    <button class="action-btn" onclick="shareStore('${store.pseudo}')">
+                        <i class="fas fa-share-alt"></i> Partager ce store
+                    </button>
+                </div>
+            `;
+            
+            if (store.description) {
+                html += `
+                    <div class="store-description">
+                        <h3><i class="fas fa-info-circle"></i> À propos</h3>
+                        <p>${store.description}</p>
+                    </div>
+                `;
+            }
+            
+            html += `
+                <div class="products-header">
+                    <h2><i class="fas fa-boxes"></i> Tous les produits</h2>
+                    <span class="count">${products.length} produit${products.length > 1 ? 's' : ''}</span>
+                </div>
+            `;
+            
+            if (products.length === 0) {
+                html += `
+                    <div class="no-products">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Aucun produit disponible</h3>
+                        <p>Ce store n'a pas encore de produits en ligne</p>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="products-grid">
+                        ${products.map(product => createProductCard(product, store)).join('')}
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function createProductCard(product, store) {
+            const isNew = (new Date() - new Date(product.date)) / (1000 * 60 * 60) <= 48;
+            const priceFormatted = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            
+            const message = encodeURIComponent(
+                `Bonjour, je suis intéressé par votre produit :\n\n` +
+                `📱 ${product.title}\n` +
+                `💰 Prix: $${priceFormatted}\n` +
+                `📝 Description: ${product.description || ''}\n\n` +
+                `Est-il toujours disponible ?`
+            );
+            
+            return `
+                <div class="product-card">
+                    ${isNew ? '<span class="new-badge">✨ Nouveau</span>' : ''}
+                    <img src="${product.image}" alt="${product.title}" 
+                         onerror="this.src='https://via.placeholder.com/200x150?text=Produit'">
+                    <div class="product-info">
+                        <h3>${product.title}</h3>
+                        <div class="product-price">${priceFormatted}</div>
+                        <span class="product-condition">${product.condition}</span>
+                        <a href="https://wa.me/${store.whatsapp.replace(/[^0-9]/g, '')}?text=${message}" 
+                           class="product-whatsapp" 
+                           target="_blank">
+                            <i class="fab fa-whatsapp"></i> Contacter
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+        
+        window.shareStore = function(pseudo) {
+            const url = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: document.querySelector('h1')?.textContent || 'iPhoneCongo Store',
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('Lien copié !');
+                });
+            }
+        };
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', loadPublicStore);
+    </script>
+</body>
+  </html>
