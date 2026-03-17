@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Stores</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/logo.svg" alt="iPhoneCongo" style="height: 40px; width: auto; margin-right: 0.5rem;">
+            <h1>iPhone<span>Congo</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="nav-link">accueil</a>
+            <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
+        </div>
+    </header>
+
+    <main>
+        <!-- Barre de recherche principale -->
+        <div class="search-bar" id="searchBar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchStore" placeholder="Rechercher store ou produit..." oninput="filterStores()">
+            <i class="fas fa-times" onclick="clearSearch()"></i>
+        </div>
+
+        <!-- Bouton ajouter un store -->
+        <a href="stores/register.html" class="btn-add-store">
+            <i class="fas fa-plus-circle"></i> Ajouter un store
+        </a>
+
+        <!-- Filtres compacts -->
+        <div class="filters-compact">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-clock"></i> Période</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn" onclick="setHourFilter(1)">1h</button>
+                    <button class="filter-btn active" onclick="setHourFilter(24)">24h</button>
+                    <button class="filter-btn" onclick="setHourFilter(48)">48h</button>
+                    <button class="filter-btn" onclick="setHourFilter(168)">Semaine</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-map-marker-alt"></i> Ville</span>
+                <input type="text" id="cityFilter" class="filter-input" placeholder="Ex: Lubumbashi..." oninput="filterStores()">
+            </div>
+        </div>
+
+        <!-- Compteur de résultats -->
+        <div class="results-count" id="resultsCount">Chargement...</div>
+
+        <!-- Liste des stores -->
+        <div id="storesList" class="stores-list"></div>
+    </main>
+
+    <footer>
+        <p>© 2024 iPhoneCongo • Communauté</p>
+        <p style="margin-top: 0.5rem;">
+            <i class="fab fa-whatsapp" style="color: #25d366;"></i> 
+            <a href="https://wa.me/243972685669" style="color: var(--gray); text-decoration: none;">+243 972 685 669</a>
+        </p>
+    </footer>
+
+    <script src="stores/stores.js"></script>
+    <script src="store.js"></script>
+</body>
+</html>
