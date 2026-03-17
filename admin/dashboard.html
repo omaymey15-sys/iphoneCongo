@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Admin</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-wrapper { display: flex; }
+        .sidebar { width: 200px; background: var(--dark); color: white; padding: 1rem; min-height: 100vh; }
+        .sidebar a { color: #ccc; display: block; padding: 0.5rem; text-decoration: none; }
+        .sidebar a:hover { background: var(--primary); color: white; }
+        .main { flex:1; padding:1rem; }
+        .admin-table { width:100%; border-collapse: collapse; background: white; border-radius: var(--radius-md); overflow: hidden; }
+        .admin-table th { background: var(--primary); color: white; padding: 0.5rem; }
+        .admin-table td { padding: 0.5rem; border-bottom: 1px solid var(--light-gray); }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <div class="sidebar">
+            <h3>iPhoneCongo</h3>
+            <a href="#" onclick="loadSection('dashboard')">Dashboard</a>
+            <a href="#" onclick="loadSection('add')">Ajouter</a>
+            <a href="#" onclick="logout()">Déconnexion</a>
+        </div>
+        <div class="main" id="adminMain">
+            <h2>Chargement...</h2>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
