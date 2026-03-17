@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhoneCongo - iPhone, Samsung & Accessoires</title>
+    <title>iPhoneCongo - Store Officiel</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -13,59 +13,68 @@
             <i class="fas fa-mobile-alt"></i>
             <h1>iPhone<span>Congo</span></h1>
         </div>
-        <div class="header-search">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Rechercher un produit...">
+        <div class="header-actions">
+            <a href="store.html" class="nav-link">stores</a>
+            <i class="fas fa-search search-icon"></i>
         </div>
-        <nav>
-            <a href="index.html" class="active">Accueil</a>
-            <a href="store.html">Stores</a>
-            <a href="stores/register.html">Devenir store</a>
-        </nav>
     </header>
 
     <main>
-        <!-- Hero simple -->
-        <div class="page-title">
-            <h2>iPhone & Samsung</h2>
-            <p>Les meilleurs smartphones et accessoires à Lubumbashi & Kolwezi</p>
+        <!-- Hero -->
+        <div class="hero">
+            <h2>iPhoneCongo</h2>
+            <p>Lubumbashi · Kolwezi</p>
         </div>
 
-        <!-- Section Nouveautés -->
-        <section class="products-section">
-            <h3 class="section-title">✨ Nouveautés</h3>
-            <div class="products-grid" id="newProducts"></div>
-        </section>
-
-        <!-- Section iPhone -->
-        <section class="products-section">
-            <h3 class="section-title">📱 iPhone</h3>
-            <div class="products-grid" id="iphoneProducts"></div>
-        </section>
-
-        <!-- Section Samsung -->
-        <section class="products-section">
-            <h3 class="section-title">🤖 Samsung</h3>
-            <div class="products-grid" id="samsungProducts"></div>
-        </section>
-
-        <!-- Section Accessoires -->
-        <section class="products-section">
-            <h3 class="section-title">🎧 Accessoires</h3>
-            <div class="products-grid" id="accessoryProducts"></div>
-        </section>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <span class="page active">1</span>
-            <span class="page">2</span>
-            <span class="page">3</span>
-            <span class="next">→</span>
+        <!-- Barre de recherche -->
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Rechercher un produit...">
         </div>
+
+        <!-- Nouveautés -->
+        <section class="section">
+            <div class="section-header">
+                <h3><i class="fas fa-star"></i> Nouveautés</h3>
+                <span class="count">10</span>
+            </div>
+            <div class="grid" id="newProducts"></div>
+        </section>
+
+        <!-- iPhone -->
+        <section class="section">
+            <div class="section-header">
+                <h3><i class="fab fa-apple"></i> iPhone</h3>
+                <span class="count" id="iphoneCount">0</span>
+            </div>
+            <div class="grid" id="iphoneProducts"></div>
+        </section>
+
+        <!-- Samsung -->
+        <section class="section">
+            <div class="section-header">
+                <h3><i class="fab fa-android"></i> Samsung</h3>
+                <span class="count" id="samsungCount">0</span>
+            </div>
+            <div class="grid" id="samsungProducts"></div>
+        </section>
+
+        <!-- Accessoires -->
+        <section class="section">
+            <div class="section-header">
+                <h3><i class="fas fa-headphones"></i> Accessoires</h3>
+                <span class="count" id="accessoryCount">0</span>
+            </div>
+            <div class="grid" id="accessoryProducts"></div>
+        </section>
     </main>
 
     <footer>
-        <p>© 2024 iPhoneCongo • Lubumbashi & Kolwezi • <i class="fab fa-whatsapp"></i> <a href="https://wa.me/243972685669">+243 972 685 669</a></p>
+        <p>© 2024 iPhoneCongo · Lubumbashi & Kolwezi</p>
+        <p class="whatsapp-footer">
+            <i class="fab fa-whatsapp"></i> 
+            <a href="https://wa.me/243972685669">+243 972 685 669</a>
+        </p>
     </footer>
 
     <script src="script.js"></script>
