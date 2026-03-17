@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Mon store</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard { max-width: 1200px; margin: 1rem auto; }
+        .store-profile { background: white; border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem; }
+        .profile-logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); }
+        .profile-info h2 { font-size: 1.3rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: white; border-radius: var(--radius-md); padding: 1rem; text-align: center; }
+        .stat-card i { font-size: 1.5rem; color: var(--primary); }
+        .add-product { background: white; border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .products-scroll { display: flex; overflow-x: auto; gap: 1rem; padding: 0.5rem 0; }
+        .product-mini { min-width: 150px; background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--light-gray); }
+        .product-mini img { width: 100%; height: 100px; object-fit: contain; padding: 0.5rem; }
+        .product-mini .info { padding: 0.5rem; }
+        .btn-delete { background: var(--danger); color: white; border: none; padding: 0.3rem 0.5rem; border-radius: var(--radius-sm); cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../assets/logo.svg" alt="iPhoneCongo" style="height:40px;"><h1>iPhone<span>Congo</span></h1></div>
+        <div class="header-actions">
+            <a href="../index.html" class="nav-link">accueil</a>
+            <a href="../store.html" class="nav-link">stores</a>
+        </div>
+    </header>
+    <main>
+        <div id="dashboardContent" class="dashboard"></div>
+    </main>
+    <footer>
+        <p>© 2024 iPhoneCongo • Dashboard</p>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/243972685669">+243 972 685 669</a></p>
+    </footer>
+    <script src="stores.js"></script>
+    <script>
+        function loadDashboard() {
+            const params = new URLSearchParams(window.location.search);
+            const storeId = parseInt(params.get('id'));
+            if (!storeId) { window.location.href = 'register.html'; return; }
+            const stores = getStores();
+            const store = stores.find(s => s.id === storeId);
+            if (!store) { window.location.href = 'register.html'; return; }
+            if (!checkStoreAuth(storeId)) { alert('Veuillez vous connecter'); window.location.href = 'login.html'; return; }
+            const products = getStoreProducts(storeId);
+            document.getElementById('dashboardContent').innerHTML = `
+                <div class="store-profile">
+                    <img src="${store.logo}" class="profile-logo">
+                    <div class="profile-info"><h2>${store.name}</h2><p>${store.city}</p></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><i class="fas fa-box"></i><h3>${products.length}</h3><p>Produits</p></div>
+                    <div class="stat-card"><i class="fas fa-clock"></i><h3>${products.filter(p => (new Date()-new Date(p.date))<86400000).length}</h3><p>Nouveautés</p></div>
+                    <div class="stat-card"><i class="fas fa-eye"></i><h3>0</h3><p>Vues</p></div>
+                </div>
+                <div class="add-product">
+                    <h3><i class="fas fa-plus-circle"></i> Ajouter un produit</h3>
+                    <form onsubmit="addProduct(event, ${storeId})">
+                        <div class="form-row">
+                            <select id="cat"><option value="iphone">iPhone</option><option value="samsung">Samsung</option><option value="accessoire">Accessoire</option></select>
+                            <input type="text" id="title" placeholder="Titre" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="price" placeholder="Prix $" required>
+                            <input type="url" id="image" placeholder="URL image" required>
+                        </div>
+                        <textarea id="desc" placeholder="Description" rows="2"></textarea>
+                        <button type="submit" class="btn-add-store">Ajouter</button>
+                    </form>
+                </div>
+                <div class="add-product">
+                    <h3>Mes produits</h3>
+                    <div class="products-scroll">
+                        ${products.map(p => `
+                            <div class="product-mini">
+                                <img src="${p.image}">
+                                <div class="info"><strong>${p.title}</strong><br>$${p.price}</div>
+                                <button class="btn-delete" onclick="deleteProduct(${storeId}, ${p.id})">Supprimer</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        window.addProduct = function(e, storeId) {
+            e.preventDefault();
+            const products = getStoreProducts(storeId);
+            products.unshift({
+                id: Date.now(),
+                category: document.getElementById('cat').value,
+                title: document.getElementById('title').value,
+                price: parseFloat(document.getElementById('price').value),
+                image: document.getElementById('image').value,
+                description: document.getElementById('desc').value,
+                storeId: storeId,
+                date: new Date().toISOString()
+            });
+            saveStoreProducts(storeId, products);
+            loadDashboard();
+        };
+        window.deleteProduct = function(storeId, productId) {
+            if (confirm('Supprimer ?')) {
+                saveStoreProducts(storeId, getStoreProducts(storeId).filter(p => p.id !== productId));
+                loadDashboard();
+            }
+        };
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
+</body>
+</html>
