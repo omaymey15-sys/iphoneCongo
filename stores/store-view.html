@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Store partenaire</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../assets/logo.svg" alt="iPhoneCongo" style="height:40px;"><h1>iPhone<span>Congo</span></h1></div>
+        <div class="header-actions">
+            <a href="../index.html" class="nav-link">accueil</a>
+            <a href="../store.html" class="nav-link">stores</a>
+        </div>
+    </header>
+    <main id="storeContent"></main>
+    <footer>
+        <p>© 2024 iPhoneCongo • Store partenaire</p>
+        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/243972685669">+243 972 685 669</a></p>
+    </footer>
+    <script src="stores.js"></script>
+    <script>
+        function loadPublicStore() {
+            const pseudo = new URLSearchParams(window.location.search).get('store');
+            const store = getStores().find(s => s.pseudo === pseudo);
+            if (!store) { window.location.href = '../store.html'; return; }
+            const products = getStoreProducts(store.id);
+            document.getElementById('storeContent').innerHTML = `
+                <div class="store-header" style="margin:1rem 0;">
+                    <img src="${store.logo}" class="profile-logo" style="width:80px; height:80px; border-radius:50%;">
+                    <div><h2>${store.name}</h2><p>${store.city}</p><p><i class="fab fa-whatsapp"></i> ${store.whatsapp}</p></div>
+                </div>
+                <div class="products-grid">
+                    ${products.map(p => `
+                        <div class="product-card">
+                            <img src="${p.image}">
+                            <div class="product-info">
+                                <h3>${p.title}</h3>
+                                <div class="product-price">${p.price}</div>
+                                <a href="https://wa.me/${store.whatsapp.replace(/[^0-9]/g,'')}?text=${encodeURIComponent('Bonjour '+store.name+', intéressé par '+p.title)}" class="whatsapp-btn">WhatsApp</a>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        document.addEventListener('DOMContentLoaded', loadPublicStore);
+    </script>
+</body>
+</html>
