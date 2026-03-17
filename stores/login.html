@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>iPhoneCongo - Connexion store</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .login-box { max-width: 400px; margin: 3rem auto; background: white; border-radius: var(--radius-lg); padding: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../assets/logo.svg" alt="iPhoneCongo" style="height:40px;"><h1>iPhone<span>Congo</span></h1></div>
+        <div class="header-actions">
+            <a href="../index.html" class="nav-link">accueil</a>
+            <a href="../store.html" class="nav-link">stores</a>
+        </div>
+    </header>
+    <main>
+        <div class="login-box">
+            <h2><i class="fas fa-store"></i> Connexion store</h2>
+            <form onsubmit="loginStore(event)">
+                <div class="form-group">
+                    <label>Pseudo</label>
+                    <input type="text" id="loginPseudo" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-add-store">Se connecter</button>
+            </form>
+            <p style="text-align:center; margin-top:1rem;">Pas de store ? <a href="register.html">Créer</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 iPhoneCongo</p>
+    </footer>
+    <script src="stores.js"></script>
+</body>
+  </html>
