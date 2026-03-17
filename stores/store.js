@@ -1,20 +1,111 @@
 // ==================== CONFIGURATION ====================
-const IMGBB_API_KEY = '2d209a1377a2c31de6053540d586214f';
+const IMGBB_API_KEY = '2d209a1377a2c31de6053540d586214f'; // À remplacer par votre vraie clé
 const STORES_KEY = 'iphonecongo_stores';
 const STORE_PRODUCTS_KEY = 'iphonecongo_store_products';
 const CURRENT_STORE_KEY = 'iphonecongo_current_store';
 
 // ==================== INITIALISATION ====================
 function initializeStores() {
+    console.log('Initialisation des stores...');
+    
     if (!localStorage.getItem(STORES_KEY)) {
-        localStorage.setItem(STORES_KEY, JSON.stringify([]));
+        // Stores de démonstration
+        const demoStores = [
+            {
+                id: 1001,
+                name: "Phone Shop Lubumbashi",
+                pseudo: "phoneshoplubi",
+                city: "Lubumbashi",
+                address: "Avenue Golf, Quartier Golf",
+                whatsapp: "243812345678",
+                email: "contact@phoneshop.com",
+                logo: "https://via.placeholder.com/100x100?text=PSL",
+                password: "demo123",
+                date: new Date().toISOString()
+            },
+            {
+                id: 1002,
+                name: "Kolwezi Mobile Center",
+                pseudo: "kolwezimobile",
+                city: "Kolwezi",
+                address: "Avenue de l'Indépendance, Centre-ville",
+                whatsapp: "243997654321",
+                email: "info@kolwezimobile.com",
+                logo: "https://via.placeholder.com/100x100?text=KMC",
+                password: "demo123",
+                date: new Date().toISOString()
+            },
+            {
+                id: 1003,
+                name: "Tech Store Lubumbashi",
+                pseudo: "techstorelubi",
+                city: "Lubumbashi",
+                address: "Avenue Kasaï, 45",
+                whatsapp: "243812345679",
+                email: "info@techstore.com",
+                logo: "https://via.placeholder.com/100x100?text=TSL",
+                password: "demo123",
+                date: new Date().toISOString()
+            },
+            {
+                id: 1004,
+                name: "Mobile World Kolwezi",
+                pseudo: "mobileworldkwz",
+                city: "Kolwezi",
+                address: "Avenue M'zee, 78",
+                whatsapp: "243997654322",
+                email: "contact@mobileworld.com",
+                logo: "https://via.placeholder.com/100x100?text=MWK",
+                password: "demo123",
+                date: new Date().toISOString()
+            },
+            {
+                id: 1005,
+                name: "iPhone Expert Lubumbashi",
+                pseudo: "iphoneexpert",
+                city: "Lubumbashi",
+                address: "Galerie Commerciale, 12",
+                whatsapp: "243812345680",
+                email: "expert@iphone.com",
+                logo: "https://via.placeholder.com/100x100?text=IE",
+                password: "demo123",
+                date: new Date().toISOString()
+            }
+        ];
+        localStorage.setItem(STORES_KEY, JSON.stringify(demoStores));
+        console.log('Stores de démonstration créés:', demoStores.length);
     }
+    
     if (!localStorage.getItem(STORE_PRODUCTS_KEY)) {
-        localStorage.setItem(STORE_PRODUCTS_KEY, JSON.stringify({}));
+        // Produits de démonstration pour les stores
+        const demoProducts = {
+            1001: [
+                { id: 1101, category: 'iphone', title: 'iPhone 13 128GB', price: 650, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-midnight-select-2021?wid=470&hei=556&fmt=png-alpha&.v=1630793892000', description: 'Bon état, batterie 88%', condition: 'Bon état', storeId: 1001, date: new Date().toISOString() },
+                { id: 1102, category: 'samsung', title: 'Samsung Galaxy A54 256GB', price: 450, image: 'https://images.samsung.com/is/image/samsung/p6pim/africa_en/sm-a546bzkdafd/gallery/africa-en-galaxy-a54-5g-sm-a546bzkdafd-thumb-536176333', description: 'Neuf, garantie 6 mois', condition: 'Neuf', storeId: 1001, date: new Date().toISOString() },
+                { id: 1103, category: 'accessoire', title: 'Chargeur Apple 20W', price: 25, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MU8X2?wid=400&hei=400&fmt=jpeg&qlt=95&.v=1590627935000', description: 'Original, neuf', condition: 'Neuf', storeId: 1001, date: new Date().toISOString() }
+            ],
+            1002: [
+                { id: 1201, category: 'iphone', title: 'iPhone 12 64GB', price: 450, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-black-select-2020?wid=470&hei=556&fmt=png-alpha&.v=1604347109000', description: 'Reconditionné, batterie 92%', condition: 'Reconditionné', storeId: 1002, date: new Date().toISOString() },
+                { id: 1202, category: 'samsung', title: 'Samsung S22 128GB', price: 550, image: 'https://images.samsung.com/is/image/samsung/p6pim/africa_en/sm-s901bzkdafd/gallery/africa-en-galaxy-s22-s901-sm-s901bzkdafd-thumb-535755250', description: 'Bon état', condition: 'Bon état', storeId: 1002, date: new Date().toISOString() }
+            ],
+            1003: [
+                { id: 1301, category: 'iphone', title: 'iPhone 14 Pro 128GB', price: 950, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-deep-purple-select?wid=470&hei=556&fmt=png-alpha&.v=1661448071151', description: 'Reconditionné, batterie 95%', condition: 'Reconditionné', storeId: 1003, date: new Date().toISOString() },
+                { id: 1302, category: 'accessoire', title: 'Coque iPhone 14 Pro', price: 20, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MX2Y2?wid=400&hei=400&fmt=jpeg&qlt=95&.v=1590627935000', description: 'Silicone, plusieurs couleurs', condition: 'Neuf', storeId: 1003, date: new Date().toISOString() }
+            ],
+            1004: [
+                { id: 1401, category: 'samsung', title: 'Samsung S23 Ultra 512GB', price: 1200, image: 'https://images.samsung.com/is/image/samsung/p6pim/africa_en/sm-s918bzkdafd/gallery/africa-en-galaxy-s23-ultra-s918-sm-s918bzkdafd-thumb-535755250', description: 'Neuf, sous blister', condition: 'Neuf', storeId: 1004, date: new Date().toISOString() }
+            ],
+            1005: [
+                { id: 1501, category: 'iphone', title: 'iPhone 15 Pro Max 256GB', price: 1450, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-max-black-titanium-select?wid=470&hei=556&fmt=png-alpha&.v=1692885771534', description: 'Neuf, garantie 1 an', condition: 'Neuf', storeId: 1005, date: new Date().toISOString() },
+                { id: 1502, category: 'accessoire', title: 'Écouteurs AirPods Pro', price: 180, image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro?wid=400&hei=400&fmt=jpeg&qlt=95&.v=1634140348000', description: 'Neuf', condition: 'Neuf', storeId: 1005, date: new Date().toISOString() }
+            ]
+        };
+        localStorage.setItem(STORE_PRODUCTS_KEY, JSON.stringify(demoProducts));
+        console.log('Produits de démonstration créés');
     }
 }
 
-// ==================== FONCTIONS UPLOAD ====================
+// ==================== FONCTIONS UPLOAD IMGBB ====================
 async function uploadToImgBB(file) {
     const formData = new FormData();
     formData.append('image', file);
@@ -24,11 +115,27 @@ async function uploadToImgBB(file) {
             method: 'POST',
             body: formData
         });
+        
         const data = await response.json();
-        return data.success ? data.data.url : null;
+        
+        if (data.success) {
+            return {
+                success: true,
+                url: data.data.url,
+                delete_url: data.data.delete_url
+            };
+        } else {
+            return {
+                success: false,
+                error: 'Upload failed'
+            };
+        }
     } catch (error) {
-        console.error('Upload error:', error);
-        return null;
+        console.error('Erreur upload ImgBB:', error);
+        return {
+            success: false,
+            error: error.message
+        };
     }
 }
 
@@ -36,287 +143,200 @@ window.previewAndUploadLogo = async function(event) {
     const file = event.target.files[0];
     if (!file) return;
     
+    // Vérifications
     if (file.size > 2 * 1024 * 1024) {
-        alert('Logo trop lourd (max 2 Mo)');
+        showNotification('Logo trop lourd. Maximum 2 Mo.', 'error');
         return;
     }
     
-    document.getElementById('logoUploadStatus').innerHTML = 'Upload en cours...';
+    if (!file.type.startsWith('image/')) {
+        showNotification('Format non supporté. Choisissez une image.', 'error');
+        return;
+    }
     
+    const statusDiv = document.getElementById('logoUploadStatus');
+    const preview = document.getElementById('logoPreview');
+    
+    statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Upload en cours...';
+    statusDiv.style.color = 'var(--gray)';
+    
+    // Aperçu local
     const reader = new FileReader();
-    reader.onload = e => {
-        document.getElementById('logoPreview').innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+    reader.onload = function(e) {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
     };
     reader.readAsDataURL(file);
     
-    const url = await uploadToImgBB(file);
-    if (url) {
-        document.getElementById('logoUrl').value = url;
-        document.getElementById('logoUploadStatus').innerHTML = '✅ Logo uploadé';
+    // Upload vers ImgBB
+    const result = await uploadToImgBB(file);
+    
+    if (result.success) {
+        document.getElementById('logoUrl').value = result.url;
+        statusDiv.innerHTML = '✅ Logo uploadé avec succès !';
+        statusDiv.style.color = 'var(--secondary)';
     } else {
-        document.getElementById('logoUploadStatus').innerHTML = '❌ Échec upload';
+        preview.innerHTML = '<i class="fas fa-store"></i>';
+        statusDiv.innerHTML = '❌ Échec de l\'upload. Réessayez.';
+        statusDiv.style.color = 'var(--danger)';
     }
 };
 
 // ==================== FONCTIONS STORES ====================
 window.getStores = function() {
-    return JSON.parse(localStorage.getItem(STORES_KEY)) || [];
+    try {
+        return JSON.parse(localStorage.getItem(STORES_KEY)) || [];
+    } catch (e) {
+        console.error('Erreur chargement stores:', e);
+        return [];
+    }
 };
 
 function saveStore(store) {
     const stores = getStores();
     stores.push(store);
     localStorage.setItem(STORES_KEY, JSON.stringify(stores));
+    return store;
 }
 
 window.getStoreProducts = function(storeId) {
-    const all = JSON.parse(localStorage.getItem(STORE_PRODUCTS_KEY)) || {};
-    return all[storeId] || [];
+    try {
+        const allProducts = JSON.parse(localStorage.getItem(STORE_PRODUCTS_KEY)) || {};
+        return allProducts[storeId] || [];
+    } catch (e) {
+        console.error('Erreur chargement produits:', e);
+        return [];
+    }
 };
 
 function saveStoreProducts(storeId, products) {
-    const all = JSON.parse(localStorage.getItem(STORE_PRODUCTS_KEY)) || {};
-    all[storeId] = products;
-    localStorage.setItem(STORE_PRODUCTS_KEY, JSON.stringify(all));
+    const allProducts = JSON.parse(localStorage.getItem(STORE_PRODUCTS_KEY)) || {};
+    allProducts[storeId] = products;
+    localStorage.setItem(STORE_PRODUCTS_KEY, JSON.stringify(allProducts));
+    return products;
 }
 
-// ==================== INSCRIPTION ====================
+// ==================== NOTIFICATION ====================
+function showNotification(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        ${message}
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// ==================== INSCRIPTION STORE ====================
 window.registerStore = function(event) {
     event.preventDefault();
     
-    if (document.getElementById('storePassword').value !== document.getElementById('confirmPassword').value) {
-        alert('Les mots de passe ne correspondent pas');
+    // Récupération des valeurs
+    const name = document.getElementById('storeName')?.value.trim();
+    const city = document.getElementById('storeCity')?.value.trim();
+    const pseudo = document.getElementById('storePseudo')?.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const address = document.getElementById('storeAddress')?.value.trim();
+    const whatsapp = document.getElementById('storeWhatsapp')?.value.trim();
+    const email = document.getElementById('storeEmail')?.value.trim();
+    const password = document.getElementById('storePassword')?.value;
+    const confirmPassword = document.getElementById('confirmPassword')?.value;
+    const logoUrl = document.getElementById('logoUrl')?.value;
+    
+    // Validations
+    if (!name || !city || !pseudo || !whatsapp || !password || !confirmPassword) {
+        showNotification('Tous les champs obligatoires doivent être remplis', 'error');
         return;
     }
     
-    const logoUrl = document.getElementById('logoUrl').value;
+    if (password !== confirmPassword) {
+        showNotification('Les mots de passe ne correspondent pas', 'error');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showNotification('Le mot de passe doit contenir au moins 6 caractères', 'error');
+        return;
+    }
+    
     if (!logoUrl) {
-        alert('Veuillez uploader un logo');
+        showNotification('Veuillez uploader un logo', 'error');
         return;
     }
     
+    // Vérifier si le pseudo existe déjà
+    const stores = getStores();
+    if (stores.some(s => s.pseudo === pseudo)) {
+        showNotification('Ce pseudo est déjà pris. Choisissez-en un autre.', 'error');
+        return;
+    }
+    
+    // Création du store
     const store = {
         id: Date.now(),
-        name: document.getElementById('storeName').value.trim(),
-        pseudo: document.getElementById('storePseudo').value.toLowerCase().replace(/\s+/g, ''),
-        city: document.getElementById('storeCity').value.trim(),
-        address: document.getElementById('storeAddress').value.trim(),
-        whatsapp: document.getElementById('storeWhatsapp').value.trim(),
-        email: document.getElementById('storeEmail').value.trim(),
+        name: name,
+        pseudo: pseudo,
+        city: city,
+        address: address || '',
+        whatsapp: whatsapp,
+        email: email || '',
         logo: logoUrl,
-        password: document.getElementById('storePassword').value,
-        date: new Date().toISOString()
+        password: password, // À hacher dans un vrai projet
+        date: new Date().toISOString(),
+        stats: {
+            views: 0,
+            products: 0
+        }
     };
     
-    if (getStores().some(s => s.pseudo === store.pseudo)) {
-        alert('Ce pseudo est déjà pris');
-        return;
-    }
-    
+    // Sauvegarde
     saveStore(store);
     saveStoreProducts(store.id, []);
+    
+    // Connexion automatique
     sessionStorage.setItem(CURRENT_STORE_KEY, JSON.stringify(store));
     
-    alert('✅ Store créé !');
-    window.location.href = `dashboard.html?id=${store.id}`;
+    showNotification('✅ Store créé avec succès !');
+    
+    // Redirection vers le dashboard
+    setTimeout(() => {
+        window.location.href = `dashboard.html?id=${store.id}`;
+    }, 1500);
 };
 
-// ==================== DASHBOARD ====================
-async function loadDashboard() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const storeId = parseInt(urlParams.get('id'));
-    
-    const stores = getStores();
-    const store = stores.find(s => s.id === storeId);
-    if (!store) {
-        window.location.href = 'register.html';
-        return;
-    }
-    
-    const products = getStoreProducts(storeId);
-    
-    document.getElementById('dashboardContent').innerHTML = `
-        <div class="store-profile">
-            <img src="${store.logo}" alt="${store.name}" class="profile-logo">
-            <div class="profile-info">
-                <h2>${store.name}</h2>
-                <p><i class="fas fa-map-marker-alt"></i> ${store.city}</p>
-                <p><i class="fab fa-whatsapp"></i> ${store.whatsapp}</p>
-            </div>
-        </div>
-        
-        <div class="stats-grid">
-            <div class="stat-item">
-                <i class="fas fa-box"></i>
-                <div class="number">${products.length}</div>
-                <div class="label">Produits</div>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-clock"></i>
-                <div class="number">${products.filter(p => (new Date() - new Date(p.date)) < 86400000).length}</div>
-                <div class="label">Nouveautés</div>
-            </div>
-            <div class="stat-item">
-                <i class="fas fa-eye"></i>
-                <div class="number">0</div>
-                <div class="label">Vues</div>
-            </div>
-        </div>
-        
-        <div class="add-form">
-            <h3><i class="fas fa-plus-circle"></i> Ajouter un produit</h3>
-            <form onsubmit="addStoreProduct(event, ${storeId})">
-                <div class="form-row">
-                    <div class="form-group">
-                        <select id="productCategory" required>
-                            <option value="iphone">📱 iPhone</option>
-                            <option value="samsung">📱 Samsung</option>
-                            <option value="accessoire">🎧 Accessoire</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="productTitle" placeholder="Titre" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="number" id="productPrice" placeholder="Prix $" required>
-                    </div>
-                    <div class="form-group">
-                        <select id="productCondition">
-                            <option>Neuf</option>
-                            <option>Reconditionné</option>
-                            <option>Bon état</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="url" id="productImage" placeholder="URL de l'image" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="productDescription" rows="2" placeholder="Description"></textarea>
-                </div>
-                <button type="submit" class="btn-add-store">Ajouter</button>
-            </form>
-        </div>
-        
-        <div class="products-section">
-            <h3><i class="fas fa-boxes"></i> Mes produits (${products.length})</h3>
-            <div class="horiz-scroll">
-                ${products.map(p => `
-                    <div class="horiz-card">
-                        <img src="${p.image}" alt="${p.title}">
-                        <div class="info">
-                            <div class="title">${p.title}</div>
-                            <div class="price">${p.price}</div>
-                            <div class="product-actions">
-                                <button class="edit-btn" onclick="editProduct(${storeId}, ${p.id})">Modifier</button>
-                                <button class="delete-btn" onclick="deleteStoreProduct(${storeId}, ${p.id})">Suppr</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
-
-window.addStoreProduct = function(event, storeId) {
+// ==================== CONNEXION STORE ====================
+window.loginStore = function(event) {
     event.preventDefault();
     
-    const product = {
-        id: Date.now(),
-        category: document.getElementById('productCategory').value,
-        title: document.getElementById('productTitle').value,
-        price: parseFloat(document.getElementById('productPrice').value),
-        image: document.getElementById('productImage').value,
-        description: document.getElementById('productDescription').value,
-        condition: document.getElementById('productCondition').value,
-        storeId: storeId,
-        date: new Date().toISOString()
-    };
+    const pseudo = document.getElementById('loginPseudo')?.value.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const password = document.getElementById('loginPassword')?.value;
     
-    const products = getStoreProducts(storeId);
-    products.unshift(product);
-    saveStoreProducts(storeId, products);
+    const stores = getStores();
+    const store = stores.find(s => s.pseudo === pseudo && s.password === password);
     
-    event.target.reset();
-    loadDashboard();
-};
-
-window.deleteStoreProduct = function(storeId, productId) {
-    if (confirm('Supprimer ce produit ?')) {
-        const products = getStoreProducts(storeId).filter(p => p.id !== productId);
-        saveStoreProducts(storeId, products);
-        loadDashboard();
+    if (store) {
+        sessionStorage.setItem(CURRENT_STORE_KEY, JSON.stringify(store));
+        showNotification('Connexion réussie !');
+        window.location.href = `dashboard.html?id=${store.id}`;
+    } else {
+        showNotification('Pseudo ou mot de passe incorrect', 'error');
     }
 };
 
-window.editProduct = function(storeId, productId) {
-    const products = getStoreProducts(storeId);
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    
-    document.getElementById('productCategory').value = product.category;
-    document.getElementById('productTitle').value = product.title;
-    document.getElementById('productPrice').value = product.price;
-    document.getElementById('productImage').value = product.image;
-    document.getElementById('productDescription').value = product.description;
-    document.getElementById('productCondition').value = product.condition;
-    
-    const newProducts = products.filter(p => p.id !== productId);
-    saveStoreProducts(storeId, newProducts);
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ==================== DÉCONNEXION ====================
+window.logoutStore = function() {
+    sessionStorage.removeItem(CURRENT_STORE_KEY);
+    showNotification('Déconnexion réussie');
+    window.location.href = 'register.html';
 };
 
-// ==================== PAGE PUBLIQUE ====================
-function loadPublicStore() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const pseudo = urlParams.get('store');
-    
-    const store = getStores().find(s => s.pseudo === pseudo);
-    if (!store) {
-        window.location.href = '../store.html';
-        return;
-    }
-    
-    const products = getStoreProducts(store.id);
-    
-    document.getElementById('storeContent').innerHTML = `
-        <div class="store-header">
-            <img src="${store.logo}" alt="${store.name}" class="store-logo">
-            <div class="store-header-info">
-                <h2>${store.name}</h2>
-                <p><i class="fas fa-map-marker-alt"></i> ${store.city} - ${store.address || 'Adresse non spécifiée'}</p>
-                <p><i class="fab fa-whatsapp"></i> ${store.whatsapp}</p>
-                <a href="https://wa.me/${store.whatsapp.replace(/[^0-9]/g, '')}" class="whatsapp-store-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contacter le store
-                </a>
-            </div>
-        </div>
-        
-        <div class="products-grid">
-            ${products.map(p => `
-                <div class="product-card">
-                    ${(new Date() - new Date(p.date)) < 86400000 ? '<span class="new-badge">✨ Nouveau</span>' : ''}
-                    <img src="${p.image}" alt="${p.title}">
-                    <div class="product-info">
-                        <h3>${p.title}</h3>
-                        <div class="product-price">${p.price}</div>
-                        <span class="product-condition">${p.condition}</span>
-                        <a href="https://wa.me/${store.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Bonjour ${store.name}, je suis intéressé par ${p.title} à $${p.price}`)}" class="whatsapp-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Contacter
-                        </a>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
-}
+// ==================== VÉRIFICATION CONNEXION ====================
+window.checkStoreAuth = function(storeId) {
+    const currentStore = JSON.parse(sessionStorage.getItem(CURRENT_STORE_KEY));
+    return currentStore && currentStore.id === storeId;
+};
 
-// ==================== INIT ====================
+// Initialisation
 initializeStores();
-
-if (window.location.pathname.includes('dashboard.html')) loadDashboard();
-if (window.location.pathname.includes('store-view.html')) loadPublicStore();
